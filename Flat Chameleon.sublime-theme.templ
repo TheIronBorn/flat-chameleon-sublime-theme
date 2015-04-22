@@ -1,0 +1,733 @@
+// normal = @background
+// dark = $normal, 0, 10, -10
+// darker = $normal, 0, 20, -20
+// darkest = $normal, 0, 30, -30
+// border = @background, 0, 40, -40
+// active = @lineHighlight
+// modified = @string.foreground
+// foreground = @foreground
+// foreground_match = @foreground, 0, 40, 10
+// path_foreground = @comment.foreground
+// path_foreground_match = @comment.foreground, 0, 40, 10
+// file = $foreground_match
+// folder = $foreground
+// font = ""
+// font_size_statusbar = 12.0
+// font_size_sidebar = 12.0
+// font_size_tab = 12.0
+// font_size_tooltip = 12.0
+
+[
+	// Label
+	{
+		"class": "label_control",
+		"color": [$foreground],
+		"font.face": $font,
+		"font.size": $font_size_statusbar
+	},
+	
+	
+	// Text line
+	{
+		"class": "text_line_control",
+		"layer0.tint": [$normal],
+		"layer0.opacity": 1.0,
+		"content_margin": [3, 3, 3, 3]
+	},
+	
+	
+	// Button
+	{
+		"class": "button_control",
+		"content_margin": [1, 1, 1, 1],
+		"min_size": [80, 22],
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0,
+		"layer1.tint": [$active],
+		"layer1.opacity": 0.0,
+		"layer2.texture": "Theme - Flat Chameleon/img/b_ltrb.png",
+		"layer2.inner_margin": 2,
+		"layer2.tint": [$border],
+		"layer2.opacity": 1.0
+	},
+	{
+		"class": "button_control",
+		"attributes": ["pressed"],
+		"layer1.opacity": 1.0
+	},
+	{
+		"class": "button_control",
+		"attributes": ["hover"],
+		"layer1.opacity": 1.0
+	},
+
+
+	// Small Icon Buttons
+	{
+		"class": "icon_button_control",
+		"content_margin": [4, 4],
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0,
+		"layer1.tint": [$active],
+		"layer1.opacity": 0.0,
+		"layer2.texture": "Theme - Flat Chameleon/img/b_ltb.png",
+		"layer2.inner_margin": 2,
+		"layer2.tint": [$border],
+		"layer2.opacity": 1.0,
+		"layer3.texture": "Theme - Flat Chameleon/img/b2_b.png",
+		"layer3.inner_margin": 2,
+		"layer3.tint": [$foreground],
+		"layer3.opacity": 0.0
+	},
+	{
+		"class": "icon_button_control",
+		"attributes": ["right"],
+		"layer2.texture": "Theme - Flat Chameleon/img/b_ltrb.png",
+		"layer2.inner_margin": 2
+	},
+	{
+		"class": "icon_button_control",
+		"attributes": ["left", "right"],
+		"layer2.texture": "Theme - Flat Chameleon/img/b_ltrb.png",
+		"layer2.inner_margin": 2
+	},
+	{
+		"class": "icon_button_control",
+		"attributes": ["hover"],
+		"layer1.opacity": 1.0
+	},
+	{
+		"class": "icon_button_control",
+		"attributes": ["selected"],
+		"layer3.opacity": 1.0
+	},
+	{
+		"class": "dropdown_button_control",
+		"content_margin": [8, 8],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_down.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 0.9
+	},
+	{
+		"class": "dropdown_button_control",
+		"attributes": ["hover"],
+		"layer0.opacity": 1.0
+	},
+
+
+	// Tooltip
+	{
+		"class": "tool_tip_control",
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0,
+		"layer1.texture": "Theme - Flat Chameleon/img/b_ltrb.png",
+		"layer1.inner_margin": 2,
+		"layer1.tint": [$border],
+		"layer1.opacity": 1.0,
+		"content_margin": [10, 5, 10, 5]
+	},
+	{
+		"class": "tool_tip_label_control",
+		"color": [$foreground],
+		"font.face": $font,
+		"font.size": $font_size_tooltip
+	},
+	
+	
+	// Scrollbars
+	{
+		"class": "scroll_bar_control",
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0,
+		"blur": false
+	},
+	{
+		"class": "scroll_bar_control",
+		"attributes": ["horizontal"],
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0,
+		"blur": false
+	},
+	{
+		"class": "scroll_corner_control",
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "puck_control",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [4, 4],
+		"blur": false
+	},
+	{
+		"class": "puck_control",
+		"attributes": ["horizontal"],
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [4, 4],
+		"blur": false
+	},
+	{
+		"class": "scroll_area_control",
+		"settings": ["overlay_scroll_bars"],
+		"overlay": true
+	},
+	{
+		"class": "scroll_area_control",
+		"settings": ["!overlay_scroll_bars"],
+		"overlay": false
+	},
+	
+	
+	// Layout
+	{
+		"class": "grid_layout_control",
+		"border_size": 1,
+		"border_color": [$border]
+	},
+	
+	
+	// Window background
+	{
+		"class": "sheet_container_control",
+		"layer0.tint": [$normal],
+		"layer0.opacity": 1.0
+	},
+	
+	
+	// Dialog
+	{
+		"class": "dialog",
+		"layer0.tint": [$normal],
+		"layer0.opacity": 1.0
+	},
+	
+	
+	// Popup
+	{
+		"class": "popup_control",
+		"content_margin": [1, 1, 1, 1],
+		"layer0.tint": [$border],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "table_row",
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0,
+		"layer1.texture": "Theme - Flat Chameleon/img/b_t.png",
+		"layer1.inner_margin": 2,
+		"layer1.tint": [$border],
+		"layer1.opacity": 0.0
+	},
+	{
+		"class": "table_row",
+		"attributes": ["selected"],
+		"layer0.tint": [$active]
+	},
+	
+	
+	// Side bar
+	{
+		"class": "sidebar_container",
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0,
+		"content_margin": [0, 0, 0, 0]
+	},
+	{
+		"class": "sidebar_tree",
+		"row_padding": [8, 3],
+		"indent": 12,
+		"indent_offset": 17,
+		"indent_top_level": false,
+		"dark_content": false
+	},
+	{
+		"class": "sidebar_heading",
+		"color": [$foreground],
+		"font.bold": true
+	},
+	{
+		"class": "sidebar_heading",
+		"parents":
+		[
+			{ "class": "tree_row", "attributes": ["selected"] }
+		]
+	},
+	{
+		"class": "sidebar_label",
+		"color": [$file],
+		"font.size": $font_size_sidebar,
+		"font.face": $font,
+		"font.bold": false,
+		"font.italic": false
+	},
+	{
+		"class": "sidebar_label",
+		"parents": [{"class": "tree_row", "attributes": ["selected"]}],
+		"color": [$file]
+	},
+	{
+		"class": "sidebar_label",
+		"parents": [{"class": "tree_row", "attributes": ["expandable"]}],
+		"settings": ["bold_folder_labels"],
+		"color": [$folder],
+		"font.bold": true
+	},
+	{
+		"class": "sidebar_label",
+		"attributes": ["transient"],
+		"font.italic": true
+	},
+	// Side bar item
+	{
+		"class": "tree_row",
+		"layer0.tint": [$active],
+		"layer0.opacity": 0.0
+	},
+	{
+		"class": "tree_row",
+		"attributes": ["selected"],
+		"layer0.opacity": 1.0
+	},
+	// Side bar arrows
+	{
+		"class": "disclosure_button_control",
+		"content_margin": [9, 7, 8, 6],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_right.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 0.9,
+		"layer0.inner_margin": 0
+	},
+	{
+		"class": "disclosure_button_control",
+		"parents":
+		[
+			{ "class": "tree_row", "attributes": ["hover"] }
+		],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "disclosure_button_control",
+		"attributes": ["expanded"],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_down.png",
+		"layer0.tint": [$foreground]
+	},
+	
+
+	// Minimap
+	{
+		"class": "minimap_control",
+		"settings": ["always_show_minimap_viewport"],
+		"viewport_color": [$foreground, 50],
+		"viewport_opacity": 1.0
+	},
+	{
+		"class": "minimap_control",
+		"settings": ["!always_show_minimap_viewport"],
+		"viewport_color": [$foreground, 50],
+		"viewport_opacity": { "target": 0.0, "speed": 4.0, "interpolation": "smoothstep" }
+	},
+	{
+		"class": "minimap_control",
+		"attributes": ["hover"],
+		"settings": ["!always_show_minimap_viewport"],
+		"viewport_opacity": { "target": 1.0, "speed": 20.0, "interpolation": "smoothstep" }
+	},
+
+	
+	// Status bar
+	{
+		"class": "status_bar",
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0,
+		"layer1.texture": "Theme - Flat Chameleon/img/b_t.png",
+		"layer1.inner_margin": 2,
+		"layer1.tint": [$border],
+		"layer1.opacity": 1.0,
+		"content_margin": [4, 1, 4, 0]
+	},
+	{
+		"class": "status_container",
+		"content_margin": [0, 2, 0, 3]
+	},
+	{
+		"class": "status_button",
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0,
+		"layer1.texture": "Theme - Flat Chameleon/img/b_l.png",
+		"layer1.inner_margin": 2,
+		"layer1.tint": [$border],
+		"layer1.opacity": 1.0,
+		"content_margin": [10, 2, 10, 3],
+		"min_size": [80, 0]
+	},
+	// Status bar & Switch project panel
+	{
+		"class": "panel_control",
+		"content_margin": [0, 0],
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0,
+		"layer1.texture": "Theme - Flat Chameleon/img/b_t.png",
+		"layer1.inner_margin": 2,
+		"layer1.tint": [$border],
+		"layer1.opacity": 1.0
+	},
+	// Status bar close button
+	{
+		"class": "panel_close_button",
+		"content_margin": [0, 0]
+	},
+	
+
+	// Quick Panel
+	{
+		"class": "overlay_control",
+		"content_margin": [1, 0, 1, 1],
+		"layer0.tint": [$normal],
+		"layer0.opacity": 1.0,
+		"layer1.texture": "Theme - Flat Chameleon/img/b_lrb.png",
+		"layer1.inner_margin": 2,
+		"layer1.tint": [$border],
+		"layer1.opacity": 1.0
+	},
+	{
+		"class": "quick_panel",
+		"row_padding": [2, 1],
+		"layer0.tint": [$darker],
+		"layer0.opacity": 1.0,
+		"dark_content": false
+	},
+	{
+		"class": "quick_panel_row",
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "quick_panel_row",
+		"attributes": ["selected"],
+		"layer0.tint": [$active]
+	},
+	{
+		"class": "quick_panel_label",
+		"fg": [$foreground],
+		"match_fg": [$foreground_match],
+		"selected_fg": [$foreground],
+		"selected_match_fg": [$foreground_match]
+	},
+	{
+		"class": "quick_panel_path_label",
+		"fg": [$path_foreground],
+		"match_fg": [$path_foreground_match],
+		"selected_fg": [$path_foreground],
+		"selected_match_fg": [$path_foreground_match]
+	},
+	{
+		"class": "quick_panel_score_label",
+		"fg": [$path_foreground],
+		"selected_fg": [$path_foreground]
+	},
+	{
+		"class": "mini_quick_panel_row",
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "mini_quick_panel_row",
+		"attributes": ["selected"],
+		"layer0.tint": [$active]
+	},
+	
+	
+	// Autocomplete
+	{
+		"class": "auto_complete",
+		"row_padding": [2, 0],
+		"layer0.tint": [$normal],
+		"layer0.opacity": 1.0,
+		"dark_content": false
+	},
+	{
+		"class": "auto_complete_label",
+		"fg": [$foreground],
+		"match_fg": [$foreground_match],
+		"selected_fg": [$foreground],
+		"selected_match_fg": [$foreground_match]
+	},
+
+
+	// Tab set
+	{
+		"class": "tabset_control",
+		"content_margin": [1, 1, 1, 1],
+		"tab_overlap": -1,
+		"tab_width": 50,
+		"tab_min_width": 48,
+		"tab_height": 24,
+		"mouse_wheel_switch": false,
+		"layer0.tint": [$darkest],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "tabset_control",
+		"settings": ["mouse_wheel_switches_tabs", "!enable_tab_scrolling"],
+		"mouse_wheel_switch": true
+	},
+	
+	
+	// Tab
+	{
+		"class": "tab_control",
+		"content_margin": [10, 0, 10, 0],
+		"max_margin_trim": 1,
+		"hit_test_level": 0.4,
+		"layer0.texture": "Theme - Flat Chameleon/img/f.png",
+		"layer0.inner_margin": 2,
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0,
+		"layer1.texture": "Theme - Flat Chameleon/img/b2_b.png",
+		"layer1.inner_margin": 2,
+		"layer1.tint": [$foreground],
+		"layer1.opacity": 0.0
+	},
+	{
+		"class": "tab_control", 
+		"attributes": ["selected"],
+		"layer0.tint": [$normal],
+		"layer1.opacity": 1.0
+	},
+	{
+		"class": "tab_control", 
+		"attributes": ["dirty"],
+		"settings": ["highlight_modified_tabs"]
+	},
+	
+	
+	// Tab Labels
+	{
+		"class": "tab_label",
+		"fg": [$foreground],
+		"font.size": $font_size_tab,
+		"font.face": $font,
+		"font.italic": false
+	},
+	{
+		"class": "tab_label",
+		"parents": [{"class": "tab_control", "attributes": ["selected"]}],
+		"fg": [$foreground]
+	},
+	{
+		"class": "tab_label",
+		"parents": [{"class": "tab_control", 
+			"attributes": ["dirty"], "settings": ["highlight_modified_tabs"]}],
+		"fg": [$modified]
+	},
+	{
+		"class": "tab_label",
+		"attributes": ["transient"],
+		"font.italic": true
+	},
+
+
+	// Tabset buttons
+	{
+		"class": "scroll_tabs_left_button",
+		"content_margin": [9, 7, 8, 6],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_left.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 0.9,
+		"layer0.inner_margin": 0
+	},
+	{
+		"class": "scroll_tabs_left_button",
+		"attributes": ["hover"],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "scroll_tabs_right_button",
+		"content_margin": [9, 7, 8, 6],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_right.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 0.9,
+		"layer0.inner_margin": 0
+	},
+	{
+		"class": "scroll_tabs_right_button",
+		"attributes": ["hover"],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "show_tabs_dropdown_button",
+		"content_margin": [9, 7, 8, 6],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_down.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 0.9,
+		"layer0.inner_margin": 0
+	},
+	{
+		"class": "show_tabs_dropdown_button",
+		"attributes": ["hover"],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "fold_button_control",
+		"content_margin": [9, 7, 8, 6],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_right.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 0.9,
+		"layer0.inner_margin": 0
+	},
+	{
+		"class": "fold_button_control",
+		"attributes": ["hover"],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "fold_button_control",
+		"attributes": ["expanded"],
+		"layer0.texture": "Theme - Flat Chameleon/icons/arrow_down.png",
+		"layer0.tint": [$foreground]
+	},
+
+
+	// Progress bar
+	{
+		"class": "progress_bar_control",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "progress_gauge_control",
+		"layer0.tint": [$dark],
+		"layer0.opacity": 1.0,
+		"content_margin": [0, 6]
+	},
+
+	
+	// Icons
+	{
+		"class": "icon_regex",
+		"layer0.texture": "Theme - Flat Chameleon/icons/find_regex.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_case",
+		"layer0.texture": "Theme - Flat Chameleon/icons/find_case.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_highlight",
+		"layer0.texture": "Theme - Flat Chameleon/icons/find_highlight.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_in_selection",
+		"layer0.texture": "Theme - Flat Chameleon/icons/find_inselection.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_reverse",
+		"layer0.texture": "Theme - Flat Chameleon/icons/find_reverse.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_whole_word",
+		"layer0.texture": "Theme - Flat Chameleon/icons/find_wholeword.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_wrap",
+		"layer0.texture": "Theme - Flat Chameleon/icons/find_wrap.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_preserve_case",
+		"layer0.texture": "Theme - Flat Chameleon/icons/replace_preserve_case.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_context",
+		"layer0.texture": "Theme - Flat Chameleon/icons/context.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_use_buffer",
+		"layer0.texture": "Theme - Flat Chameleon/icons/use_buffer.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+
+
+	// file and folder icons
+	{
+		"class": "icon_file_type",
+		// layer0.texture is filled in by code with the relevant icon name
+		"layer0.tint": [$file],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_folder",
+		"layer0.texture": "Theme - Flat Chameleon/icons/folder.png",
+		"layer0.tint": [$folder],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_folder",
+		"parents":
+		[
+			{ "class": "tree_row", "attributes": ["expanded"] }
+		],
+		"layer0.texture": "Theme - Flat Chameleon/icons/folder_open.png",
+		"layer0.tint": [$folder]
+	},
+	{
+		"class": "icon_folder_loading",
+		"layer0.texture":
+		{
+			"keyframes":
+			[
+				"Theme - Flat Chameleon/icons/spinner7.png",
+				"Theme - Flat Chameleon/icons/spinner6.png",
+				"Theme - Flat Chameleon/icons/spinner5.png",
+				"Theme - Flat Chameleon/icons/spinner4.png",
+				"Theme - Flat Chameleon/icons/spinner3.png",
+				"Theme - Flat Chameleon/icons/spinner2.png",
+				"Theme - Flat Chameleon/icons/spinner1.png",
+				"Theme - Flat Chameleon/icons/spinner.png"
+			],
+			"loop": true,
+			"frame_time": 0.075
+		},
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "icon_folder_dup",
+		"layer0.texture": "Theme - Flat Chameleon/icons/folder_dup.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 1.0,
+		"content_margin": [8, 8]
+	}
+]
