@@ -137,20 +137,20 @@
 	// Scrollbars
 	{
 		"class": "scroll_bar_control",
-		"layer0.tint": [57, 57, 57],
+		"layer0.tint": [77, 77, 77],
 		"layer0.opacity": 1.0,
 		"blur": false
 	},
 	{
 		"class": "scroll_bar_control",
 		"attributes": ["horizontal"],
-		"layer0.tint": [57, 57, 57],
+		"layer0.tint": [77, 77, 77],
 		"layer0.opacity": 1.0,
 		"blur": false
 	},
 	{
 		"class": "scroll_corner_control",
-		"layer0.tint": [57, 57, 57],
+		"layer0.tint": [77, 77, 77],
 		"layer0.opacity": 1.0
 	},
 	{
