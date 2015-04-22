@@ -11,19 +11,19 @@
 // path_foreground_match = @comment.foreground, 0, 40, 10
 // file = 238, 238, 232
 // folder = 248, 248, 242
-// font = "Ubuntu"
-// font_size_statusbar = 14.0
-// font_size_sidebar = 14.0
+// font = ""
+// font_size_statusbar = 12.0
+// font_size_sidebar = 12.0
 // font_size_tab = 12.0
-// font_size_tooltip = 14.0
+// font_size_tooltip = 12.0
 
 [
 	// Label
 	{
 		"class": "label_control",
 		"color": [248, 248, 242],
-		"font.face": "Ubuntu",
-		"font.size": 14.0
+		"font.face": "",
+		"font.size": 12.0
 	},
 	
 	
@@ -129,8 +129,8 @@
 	{
 		"class": "tool_tip_label_control",
 		"color": [248, 248, 242],
-		"font.face": "Ubuntu",
-		"font.size": 14.0
+		"font.face": "",
+		"font.size": 12.0
 	},
 	
 	
@@ -257,8 +257,8 @@
 	{
 		"class": "sidebar_label",
 		"color": [238, 238, 232],
-		"font.size": 14.0,
-		"font.face": "Ubuntu",
+		"font.size": 12.0,
+		"font.face": "",
 		"font.bold": false,
 		"font.italic": false
 	},
@@ -508,7 +508,7 @@
 		"class": "tab_label",
 		"fg": [248, 248, 242],
 		"font.size": 12.0,
-		"font.face": "Ubuntu",
+		"font.face": "",
 		"font.italic": false
 	},
 	{
