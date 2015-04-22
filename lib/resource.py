@@ -1,3 +1,8 @@
+'''
+Licensed under MIT
+Copyright (c) 2015 r3a1ay <https://github.com/r3a1ay>
+'''
+
 import errno
 import os
 import sublime

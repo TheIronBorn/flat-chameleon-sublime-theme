@@ -1,3 +1,8 @@
+'''
+Licensed under MIT
+Copyright (c) 2015 r3a1ay <https://github.com/r3a1ay>
+'''
+
 import re
 import sublime
 import sublime_plugin
