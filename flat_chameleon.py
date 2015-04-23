@@ -29,14 +29,15 @@ re_value = re.compile(
 re_ws = re.compile('[ \t]+')
 
 
-class FlatChameleonChameleonize(sublime_plugin.TextCommand):
+class Chameleonize(sublime_plugin.TextCommand):
 
     def add_error(self, msg, msg_params=None):
         if msg_params is None:
             msg_params = ()
         msg = msg % msg_params
-        self.errors.append(msg)
-        print('FCT: ' + msg)
+        if msg not in self.errors:
+            self.errors.append(msg)
+            print('FCT: ' + msg)
 
     def parse(self, value):
         mo = re_value.match(value)
@@ -213,4 +214,4 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
                         safe_update(settings, self.color_map, scope)
 
         if update_theme:
-            sublime.active_window().run_command('flat_chameleon_chameleonize')
+            sublime.active_window().run_command('chameleonize')
