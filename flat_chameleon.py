@@ -160,6 +160,7 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
         return self.color_map
 
     def parse_scheme(self):
+        self.settings = sublime.load_settings('Preferences.sublime-settings')
         color_scheme = self.settings.get(
             'color_scheme',
             'Packages/Color Scheme - Default/Monokai.tmTheme')
