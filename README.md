@@ -2,7 +2,7 @@
 
 Flat UI theme for Sublime Text 3 with dynamic colors.
 
-![](https://github.com/r3a1ay/helper/blob/master/img/flat_chameleon/theme.png)  
+![](https://github.com/r3a1ay/helper/blob/master/img/flat_chameleon/theme.png?raw=true)  
 
 ##Installation  
 
