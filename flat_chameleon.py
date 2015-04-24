@@ -6,12 +6,13 @@ Copyright (c) 2015 r3a1ay <https://github.com/r3a1ay>
 import re
 import sublime
 import sublime_plugin
+import sys
 from .lib.rgba import RGBA
 from .lib.resource import resource
 from plistlib import readPlistFromBytes
 
 msg_er_parser = 'Parser error: %s'
-msg_er_scheme = 'Color map is empty'
+msg_er_scheme = 'Color scheme "%s" cannot be parsed'
 msg_er_var = 'Unknown var: %s'
 
 package = 'Flat Chameleon'
@@ -102,34 +103,31 @@ class Chameleonize(sublime_plugin.TextCommand):
         self.color_scheme = FCColorSchemeListener.inst.color_scheme
         self.errors = []
 
-        if self.color_map is None:
-            self.add_error(msg_er_scheme)
+        if self.color_map is not None:
+            self.fgcolor = RGBA(self.color_map['foreground'])
+            self.bgcolor = RGBA(self.color_map['background'])
+            self.is_dark = self.bgcolor.tohls()[1] < 0.5
+
+            template = resource(package, 'Flat Chameleon.sublime-theme.templ')
+            if template:
+                for mo in re_var_decl.finditer(template):
+                    self.var_map[mo.group(1)] = self.parse(mo.group(2))
+
+                def repl(mo):
+                    if mo.group(1) in self.var_map:
+                        return self.var_map[mo.group(1)]
+                    self.add_error(msg_er_var, mo.group(0))
+
+                template = re_var.sub(repl, template)
+
+        if self.errors:
+            sublime.status_message('; '.join(self.errors))
             return
 
-        self.fgcolor = RGBA(self.color_map['foreground'])
-        self.bgcolor = RGBA(self.color_map['background'])
-        self.is_dark = self.bgcolor.tohls()[1] < 0.5
-
-        template = resource(package, 'Flat Chameleon.sublime-theme.templ')
-        if template:
-            for mo in re_var_decl.finditer(template):
-                self.var_map[mo.group(1)] = self.parse(mo.group(2))
-
-            def repl(mo):
-                if mo.group(1) in self.var_map:
-                    return self.var_map[mo.group(1)]
-                self.add_error(msg_er_var, mo.group(0))
-
-            template = re_var.sub(repl, template)
-
-            if self.errors:
-                sublime.status_message('; '.join(self.errors))
-                return
-
-            resource(package, 'Flat Chameleon.sublime-theme', template)
-            settings = sublime.load_settings('Widget.sublime-settings')
-            settings.set('color_scheme', self.color_scheme)
-            sublime.save_settings('Widget.sublime-settings')
+        resource(package, 'Flat Chameleon.sublime-theme', template)
+        settings = sublime.load_settings('Widget.sublime-settings')
+        settings.set('color_scheme', self.color_scheme)
+        sublime.save_settings('Widget.sublime-settings')
 
 
 class FCColorSchemeListener(sublime_plugin.EventListener):
@@ -175,9 +173,11 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
         self.color_map = None
 
         try:
-            plist = readPlistFromBytes(
-                sublime.load_binary_resource(self.color_scheme))
+            res = sublime.load_binary_resource(self.color_scheme)
+            plist = readPlistFromBytes(res)
         except:
+            self.add_error(msg_er_scheme, self.color_scheme)
+            print('FCT: ' + sys.exc_info()[0])
             return
 
         def safe_update(fr, to, scope=''):
