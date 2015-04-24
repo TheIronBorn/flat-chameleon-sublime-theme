@@ -15,7 +15,7 @@ msg_er_scheme = 'Color map is empty'
 msg_er_scope = 'Unknown scope: %s'
 msg_er_var = 'Unknown var: %s'
 
-package = 'Theme - Flat Chameleon'
+package = 'Flat Chameleon'
 
 re_var_decl = re.compile('//\s*(\w+)\s*=\s*(.*)')
 re_var = re.compile('\$(\w+)')
