@@ -15,7 +15,7 @@ Flat UI theme for Sublime Text 3 with dynamic colors.
 ###Manual installation
 
 - Download the [zip archive](https://github.com/r3a1ay/flat-chameleon-sublime-theme/archive/master.zip)
-- Unzip the files and rename the folder to `Theme - Flat Chameleon`  
+- Unzip the files and rename the folder to `Flat Chameleon`  
 - Find your `Packages` directory using the menu item `Preferences ➔ Browse Packages...`
 - Copy the folder into your Sublime Text `Packages` directory.
 
