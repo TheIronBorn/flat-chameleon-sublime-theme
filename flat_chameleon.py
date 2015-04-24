@@ -137,6 +137,7 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
     def __init__(self):
         FCColorSchemeListener.inst = self
         self.color_scheme = None
+        self.color_map = None
         self.init()
 
     def init(self):
