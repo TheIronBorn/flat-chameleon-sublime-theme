@@ -125,6 +125,8 @@ class Chameleonize(sublime_plugin.TextCommand):
                     settings = sublime.load_settings('Widget.sublime-settings')
                     settings.set('color_scheme', self.color_scheme)
                     sublime.save_settings('Widget.sublime-settings')
+        else:
+            self.add_error(msg_er_scheme, self.color_scheme)
 
         if self.errors:
             sublime.status_message('; '.join(self.errors))
@@ -180,7 +182,6 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
             res = sublime.load_binary_resource(self.color_scheme)
             plist = readPlistFromBytes(res)
         except:
-            self.add_error(msg_er_scheme, self.color_scheme)
             print('FCT: ' + sys.exc_info()[0])
             return
 
