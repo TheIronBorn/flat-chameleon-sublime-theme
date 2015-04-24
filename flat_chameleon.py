@@ -120,14 +120,14 @@ class Chameleonize(sublime_plugin.TextCommand):
 
                 template = re_var.sub(repl, template)
 
+                if not self.errors:
+                    resource(package, 'Flat Chameleon.sublime-theme', template)
+                    settings = sublime.load_settings('Widget.sublime-settings')
+                    settings.set('color_scheme', self.color_scheme)
+                    sublime.save_settings('Widget.sublime-settings')
+
         if self.errors:
             sublime.status_message('; '.join(self.errors))
-            return
-
-        resource(package, 'Flat Chameleon.sublime-theme', template)
-        settings = sublime.load_settings('Widget.sublime-settings')
-        settings.set('color_scheme', self.color_scheme)
-        sublime.save_settings('Widget.sublime-settings')
 
 
 class FCColorSchemeListener(sublime_plugin.EventListener):
