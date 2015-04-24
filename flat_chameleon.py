@@ -12,7 +12,6 @@ from plistlib import readPlistFromBytes
 
 msg_er_parser = 'Parser error: %s'
 msg_er_scheme = 'Color map is empty'
-msg_er_scope = 'Unknown scope: %s'
 msg_er_var = 'Unknown var: %s'
 
 package = 'Flat Chameleon'
@@ -51,8 +50,7 @@ class Chameleonize(sublime_plugin.TextCommand):
                 hex_color = self.color_map[mo.group(3)]
                 clr = RGBA(hex_color)
             else:
-                self.add_error(msg_er_scope, mo.group(3))
-                clr = RGBA('#FF00FF')
+                clr = self.fgcolor
         elif mo.group(5):
             if mo.group(5) in self.var_map:
                 c = self.var_map[mo.group(5)].split(',')
@@ -108,6 +106,7 @@ class Chameleonize(sublime_plugin.TextCommand):
             self.add_error(msg_er_scheme)
             return
 
+        self.fgcolor = RGBA(self.color_map['foreground'])
         self.bgcolor = RGBA(self.color_map['background'])
         self.is_dark = self.bgcolor.tohls()[1] < 0.5
 
