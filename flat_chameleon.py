@@ -140,6 +140,7 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
         FCColorSchemeListener.inst = self
         self.color_scheme = None
         self.color_map = None
+        self.settings = None
         self.init()
 
     def init(self):
@@ -148,23 +149,27 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
             sublime.set_timeout(self.init, 200)
             return
 
-        self.settings = sublime.load_settings('Preferences.sublime-settings')
-
-        if self.settings.get('theme') == 'Flat Chameleon.sublime-theme':
-            self.settings.add_on_change(
-                'color_scheme', lambda: self.parse_scheme())
+        settings = sublime.load_settings('Preferences.sublime-settings')
+        if settings.get('theme') == 'Flat Chameleon.sublime-theme':
             self.parse_scheme()
 
     def get_color_map(self, view):
-        if self.color_map is None:
-            self.parse_scheme()
+        self.parse_scheme()
 
         return self.color_map
 
     def parse_scheme(self):
-        if sublime is None:
+        if sublime is None or \
+                sublime.active_window() is None or \
+                sublime.active_window().active_view() is None:
             return
-        self.settings = sublime.load_settings('Preferences.sublime-settings')
+
+        if self.settings is None:
+            self.settings = sublime.load_settings(
+                'Preferences.sublime-settings')
+            self.settings.add_on_change(
+                'color_scheme', lambda: self.parse_scheme())
+
         color_scheme = self.settings.get(
             'color_scheme',
             'Packages/Color Scheme - Default/Monokai.tmTheme')
