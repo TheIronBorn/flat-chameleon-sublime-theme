@@ -10,7 +10,8 @@ import traceback
 
 
 def resource(package_name, filename, data=None):
-    packages_parent_path = os.path.abspath(sublime.packages_path() + '/..')
+    packages_parent_path = os.path.abspath(
+        os.path.join(sublime.packages_path(), '..'))
     res_paths, res_files = resource_paths(package_name, filename)
 
     # read
