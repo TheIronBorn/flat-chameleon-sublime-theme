@@ -15,6 +15,7 @@ MSG_ER_PARSER = 'Parser error: %s'
 MSG_ER_SCHEME = 'Color scheme "%s" cannot be parsed'
 MSG_ER_THEME = 'Active theme: "%s"'
 MSG_ER_VAR = 'Unknown var: %s'
+MSG_ER_TEMPLATE = 'Template not found'
 
 DEFAULT_SCHEME = 'Packages/Color Scheme - Default/Monokai.tmTheme'
 PACKAGE = 'Flat Chameleon'
@@ -134,6 +135,8 @@ class Chameleonize(sublime_plugin.TextCommand):
                     settings.set('color_scheme', self.color_scheme)
                     sublime.save_settings(WIDGET)
                     print('FCT: Chameleonized')
+            else:
+                self.add_error(MSG_ER_TEMPLATE)
         else:
             self.add_error(MSG_ER_SCHEME, self.color_scheme)
 

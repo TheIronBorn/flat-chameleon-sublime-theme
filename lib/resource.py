@@ -19,11 +19,11 @@ def resource(package_name, filename, data=None):
         if int(sublime.version()) >= 3000:
             for rf in res_files:
                 try:
-                    data = sublime.load_resource(
-                        os.path.relpath(rf, packages_parent_path))
+                    relpath = os.path.relpath(rf, packages_parent_path)
+                    relpath = relpath.replace('\\', '/')
+                    data = sublime.load_resource(relpath)
                     break
                 except:
-                    print(traceback.print_exc())
                     pass
         else:
             for rf in res_files:
@@ -33,7 +33,6 @@ def resource(package_name, filename, data=None):
                     f.close()
                     break
                 except:
-                    print(traceback.print_exc())
                     pass
         return data
 
