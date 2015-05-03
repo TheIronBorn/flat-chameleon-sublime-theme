@@ -6,6 +6,7 @@ Copyright (c) 2015 r3a1ay <https://github.com/r3a1ay>
 import errno
 import os
 import sublime
+import traceback
 
 
 def resource(package_name, filename, data=None):
@@ -21,6 +22,7 @@ def resource(package_name, filename, data=None):
                         os.path.relpath(rf, packages_parent_path))
                     break
                 except:
+                    print(traceback.print_exc())
                     pass
         else:
             for rf in res_files:
@@ -30,6 +32,7 @@ def resource(package_name, filename, data=None):
                     f.close()
                     break
                 except:
+                    print(traceback.print_exc())
                     pass
         return data
 
@@ -41,6 +44,7 @@ def resource(package_name, filename, data=None):
             os.makedirs(res_path)
         except OSError as e:
             if e.errno != errno.EEXIST:
+                print(traceback.print_exc())
                 return None
     try:
         f = open(res_file, 'w')
@@ -48,6 +52,7 @@ def resource(package_name, filename, data=None):
         f.close()
         return data
     except:
+        print(traceback.print_exc())
         pass
 
     return None

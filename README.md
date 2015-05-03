@@ -28,13 +28,6 @@ Flat UI theme for Sublime Text 3 with dynamic colors.
 ```
 - Save the file and restart Sublime Text
 
-##Uninstallation or Deactivation
-
-- Activate another theme
-- Find your `Packages` directory using the menu item `Preferences ➔ Browse Packages...`
-- **Remove** `Widget.sublime-settings` file and `Flat Chameleon` folder in `Packages/User` directory
-- Restart Sublime Text
-
 ##Usage
 
 - When you change the color scheme, the theme will be updated automatically.

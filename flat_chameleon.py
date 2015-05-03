@@ -6,16 +6,22 @@ Copyright (c) 2015 r3a1ay <https://github.com/r3a1ay>
 import re
 import sublime
 import sublime_plugin
-import sys
+import traceback
 from .lib.rgba import RGBA
 from .lib.resource import resource
 from plistlib import readPlistFromBytes
 
-msg_er_parser = 'Parser error: %s'
-msg_er_scheme = 'Color scheme "%s" cannot be parsed'
-msg_er_var = 'Unknown var: %s'
+MSG_ER_PARSER = 'Parser error: %s'
+MSG_ER_SCHEME = 'Color scheme "%s" cannot be parsed'
+MSG_ER_THEME = 'Active theme: "%s"'
+MSG_ER_VAR = 'Unknown var: %s'
 
-package = 'Flat Chameleon'
+DEFAULT_SCHEME = 'Packages/Color Scheme - Default/Monokai.tmTheme'
+PACKAGE = 'Flat Chameleon'
+PREFERENCES = 'Preferences.sublime-settings'
+TEMPLATE = '%s.sublime-theme.templ' % PACKAGE
+THEME = '%s.sublime-theme' % PACKAGE
+WIDGET = 'Widget - %s.sublime-settings' % PACKAGE
 
 re_var_decl = re.compile('//\s*(\w+)\s*=\s*(.*)')
 re_var = re.compile('\$(\w+)')
@@ -60,7 +66,7 @@ class Chameleonize(sublime_plugin.TextCommand):
                 clr.g = int(c[1].strip())
                 clr.b = int(c[2].strip())
             else:
-                self.add_error(msg_er_var, mo.group(5))
+                self.add_error(MSG_ER_VAR, mo.group(5))
                 clr = RGBA('#FF00FF')
         elif mo.group(6):
             clr = RGBA()
@@ -68,7 +74,7 @@ class Chameleonize(sublime_plugin.TextCommand):
             clr.g = int(mo.group(8))
             clr.b = int(mo.group(9))
         else:
-            self.add_error(msg_er_parser, mo.group(0))
+            self.add_error(MSG_ER_PARSER, mo.group(0))
             clr = RGBA('#FF00FF')
 
         if mo.group(10):
@@ -94,21 +100,23 @@ class Chameleonize(sublime_plugin.TextCommand):
         return '%d, %d, %d' % (clr.r, clr.g, clr.b)
 
     def run(self, edit):
-        settings = sublime.load_settings('Preferences.sublime-settings')
-        if settings.get('theme') != 'Flat Chameleon.sublime-theme':
+        self.errors = []
+        settings = sublime.load_settings(PREFERENCES)
+        if settings.get('theme') != THEME:
+            self.add_error(MSG_ER_THEME, settings.get('theme'))
             return
 
         self.var_map = {}
         self.color_map = FCColorSchemeListener.inst.get_color_map(self.view)
         self.color_scheme = FCColorSchemeListener.inst.color_scheme
-        self.errors = []
+        print('FCT: [%s] Chameleonizing...' % self.color_scheme)
 
         if self.color_map is not None:
             self.fgcolor = RGBA(self.color_map['foreground'])
             self.bgcolor = RGBA(self.color_map['background'])
             self.is_dark = self.bgcolor.tohls()[1] < 0.5
 
-            template = resource(package, 'Flat Chameleon.sublime-theme.templ')
+            template = resource(PACKAGE, TEMPLATE)
             if template:
                 for mo in re_var_decl.finditer(template):
                     self.var_map[mo.group(1)] = self.parse(mo.group(2))
@@ -116,17 +124,18 @@ class Chameleonize(sublime_plugin.TextCommand):
                 def repl(mo):
                     if mo.group(1) in self.var_map:
                         return self.var_map[mo.group(1)]
-                    self.add_error(msg_er_var, mo.group(0))
+                    self.add_error(MSG_ER_VAR, mo.group(0))
 
                 template = re_var.sub(repl, template)
 
                 if not self.errors:
-                    resource(package, 'Flat Chameleon.sublime-theme', template)
-                    settings = sublime.load_settings('Widget.sublime-settings')
+                    resource(PACKAGE, THEME, template)
+                    settings = sublime.load_settings(WIDGET)
                     settings.set('color_scheme', self.color_scheme)
-                    sublime.save_settings('Widget.sublime-settings')
+                    sublime.save_settings(WIDGET)
+                    print('FCT: Chameleonized')
         else:
-            self.add_error(msg_er_scheme, self.color_scheme)
+            self.add_error(MSG_ER_SCHEME, self.color_scheme)
 
         if self.errors:
             sublime.status_message('; '.join(self.errors))
@@ -149,8 +158,8 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
             sublime.set_timeout(self.init, 200)
             return
 
-        settings = sublime.load_settings('Preferences.sublime-settings')
-        if settings.get('theme') == 'Flat Chameleon.sublime-theme':
+        settings = sublime.load_settings(PREFERENCES)
+        if settings.get('theme') == THEME:
             self.parse_scheme()
 
     def get_color_map(self, view):
@@ -165,16 +174,13 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
             return
 
         if self.settings is None:
-            self.settings = sublime.load_settings(
-                'Preferences.sublime-settings')
+            self.settings = sublime.load_settings(PREFERENCES)
             self.settings.add_on_change(
                 'color_scheme', lambda: self.parse_scheme())
 
-        color_scheme = self.settings.get(
-            'color_scheme',
-            'Packages/Color Scheme - Default/Monokai.tmTheme')
+        color_scheme = self.settings.get('color_scheme', DEFAULT_SCHEME)
 
-        settings = sublime.load_settings('Widget.sublime-settings')
+        settings = sublime.load_settings(WIDGET)
         update_theme = settings.get('color_scheme') != color_scheme
 
         if self.color_scheme == color_scheme and self.color_map is not None:
@@ -187,7 +193,7 @@ class FCColorSchemeListener(sublime_plugin.EventListener):
             res = sublime.load_binary_resource(self.color_scheme)
             plist = readPlistFromBytes(res)
         except:
-            print('FCT: ' + sys.exc_info()[0])
+            print('FCT: ' + traceback.print_exc())
             return
 
         def safe_update(fr, to, scope=''):
