@@ -290,6 +290,26 @@
 		"attributes": ["selected"],
 		"layer0.opacity": 1.0
 	},
+	// Side bar close button
+	{
+		"class": "close_button",
+		"content_margin": [8, 8],
+		"layer0.texture": "Flat Chameleon/img/x.png",
+		"layer0.tint": [$file],
+		"layer0.opacity": 0.9,
+		"layer0.inner_margin": 0
+	},
+	{
+		"class": "close_button",
+		"attributes": ["dirty"],
+		"layer0.texture": "Flat Chameleon/sublime/dot.png",
+		"layer0.tint": [$modified]
+	},
+	{
+		"class": "close_button",
+		"attributes": ["hover"],
+		"layer0.opacity": 1.0
+	},
 	// Side bar arrows
 	{
 		"class": "disclosure_button_control",
@@ -491,6 +511,11 @@
 		"layer1.opacity": 0.0
 	},
 	{
+		"class": "tab_control",
+		"settings": ["show_tab_close_buttons"],
+		"content_margin": [10, 0, 6, 0]
+	},
+	{
 		"class": "tab_control", 
 		"attributes": ["selected"],
 		"layer0.tint": [$normal],
@@ -526,6 +551,48 @@
 		"class": "tab_label",
 		"attributes": ["transient"],
 		"font.italic": true
+	},
+		
+	
+	// Tab Close Buttons
+	{
+		"class": "tab_close_button",
+		"content_margin": [0, 0],
+		"layer0.texture": "Flat Chameleon/img/x.png",
+		"layer0.tint": [$foreground],
+		"layer0.opacity": 0.9,
+		"layer0.inner_margin": 0
+	},
+	{
+		"class": "tab_close_button",
+		"settings": ["show_tab_close_buttons"],
+		"content_margin": [8, 8]
+	},
+	{
+		"class": "tab_close_button",
+		"parents": [{"class": "tab_control", "attributes": ["dirty"]}],
+		"layer0.texture": "Flat Chameleon/sublime/dot.png",
+		"layer0.tint": [$modified]
+	},
+	{
+		"class": "tab_close_button",
+		"attributes": ["selected"],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "tab_close_button",
+		"attributes": ["hover"],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "tab_close_button",
+		"attributes": ["hover", "dirty"],
+		"layer0.opacity": 1.0
+	},
+	{
+		"class": "tab_close_button",
+		"attributes": ["hover", "selected"],
+		"layer0.opacity": 1.0
 	},
 
 
